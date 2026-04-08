@@ -1,0 +1,23 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: gatewayLY
+
+  cloud:
+    gateway:
+      routes:
+        - id: service1
+          uri: http://localhost:8080
+          predicates:
+            - Path=/api1/**
+          filters:
+            - StripPrefix=1
+
+        - id: service2
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api2/**
+          filters:
+            - StripPrefix=1
